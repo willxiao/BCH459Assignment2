@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class CostCalculator<T extends Number> {
 	private CostFunction<T> costFunction;
 	

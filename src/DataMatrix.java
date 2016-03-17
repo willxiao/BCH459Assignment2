@@ -36,7 +36,7 @@ public class DataMatrix<T extends Number> {
 		List<T> originalRow = original_matrix.get(row);
 		List<T> toReturn = new ArrayList<T>();
 		for(int i = 0; i < originalRow.size(); i++){
-			toReturn.add(originalRow.get(col_map[row]));
+			toReturn.add(originalRow.get(col_map[i]));
 		}
 		return toReturn;
 	}

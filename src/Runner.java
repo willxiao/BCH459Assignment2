@@ -2,13 +2,14 @@ import java.util.Iterator;
 
 public class Runner {
 	public static final int TEN_FACTORIAL = 3628800;
+	public static final int STEP = TEN_FACTORIAL / 100;
 	
 	public static void main(String[] args){
-		DataMatrix<Double> continuous = DataImporter.importFromFile("FILENAME");
-		DataMatrix<Integer> discrete = DataImporter.convertToDiscreteData(continuous);
+		DataMatrix<Double> continuous = DataImporter.importFromFile("scrambled.csv");
+		//DataMatrix<Integer> discrete = DataImporter.convertToDiscreteData(continuous);
 		
 		CostCalculator<Double> regressionCalculator = new CostCalculator<Double>(new RegressionCost());
-		CostCalculator<Integer> smoothCalculator = new CostCalculator<Integer>(new SmoothCost());
+		//CostCalculator<Integer> smoothCalculator = new CostCalculator<Integer>(new SmoothCost());
 		
 		Double bestRegressionCost = Double.POSITIVE_INFINITY;
 		int[] bestRegressionOrder = null;
@@ -20,7 +21,7 @@ public class Runner {
 		for(Iterator<int[]> it = new PermIterator(continuous.getRow(0).size()); it.hasNext(); ) {
             int[] colOrder = it.next().clone();
 			continuous.changeColumnOrder(colOrder);
-			discrete.changeColumnOrder(colOrder);
+			//discrete.changeColumnOrder(colOrder);
 			
 			Double regCost = regressionCalculator.getCost(continuous);
 			if(regCost < bestRegressionCost){
@@ -28,15 +29,15 @@ public class Runner {
 				bestRegressionOrder = colOrder;
 			}
 			
-			Double smoothCost = smoothCalculator.getCost(discrete);
+			/*Double smoothCost = smoothCalculator.getCost(discrete);
 			if(smoothCost < bestSmoothCost){
 				bestSmoothCost = smoothCost;
 				bestSmoothOrder = colOrder;
-			}
+			}*/
 			
 			count++;
-			if( count % 1000 == 0){
-				Double percentageDone = (1.0*count)/TEN_FACTORIAL;
+			if( count % STEP == 0){
+				Double percentageDone = (100.0*count)/TEN_FACTORIAL;
 				System.out.println(percentageDone+"% done");
 			}
         }

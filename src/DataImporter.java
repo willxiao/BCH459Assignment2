@@ -44,9 +44,9 @@ public class DataImporter {
 		
 		ArrayList<ArrayList<Integer>> matrix = new ArrayList<ArrayList<Integer>>();
 		for(int i = 0; i < d.getRowCount(); i++){
+			ArrayList<Integer> row = new ArrayList<Integer>();
 			for(int j = 0; j < d.getColCount(); j++){
 				Double val = d.getValue(i, j);
-				ArrayList<Integer> row = new ArrayList<Integer>();
 				if(val >= mean + standardDeviation){
 					row.add(2);
 				}else if(val <= mean - standardDeviation){
@@ -54,8 +54,8 @@ public class DataImporter {
 				}else{
 					row.add(1);
 				}
-				matrix.add(row);
 			}
+			matrix.add(row);
 		}
 		return new DataMatrix<Integer>(matrix);
 	}
@@ -79,7 +79,7 @@ public class DataImporter {
 	
 	public static void main(String[] args){
 		DataMatrix<Double> d = importFromFile("scrambled.csv");
-		System.out.println(d.getValue(10, 5));
+		System.out.println(d.getColCount());
 		System.out.println(d);
 	}
 }
