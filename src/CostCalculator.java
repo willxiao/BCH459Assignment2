@@ -1,4 +1,4 @@
-public class CostCalculator<T> {
+public class CostCalculator<T extends Number> {
 	private CostFunction<T> costFunction;
 	
 	CostCalculator(CostFunction<T> c){
