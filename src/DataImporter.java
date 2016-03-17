@@ -1,7 +1,9 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class DataImporter {
 	public static DataMatrix<Double> importFromFile(String filename){
@@ -56,6 +58,23 @@ public class DataImporter {
 			}
 		}
 		return new DataMatrix<Integer>(matrix);
+	}
+	
+	public static DataMatrix<Double> normalizeDataByRow(DataMatrix<Double> d){
+		ArrayList<ArrayList<Double>> matrix = new ArrayList<ArrayList<Double>>();
+		for(int i = 0; i < d.getRowCount(); i++){
+			List<Double> row = d.getRow(i);
+			Double max = Collections.max(row);
+			Double min = Collections.min(row);
+			ArrayList<Double> normalized = new ArrayList<Double>();
+			for(int j = 0; j < row.size(); j++){
+				Double val = row.get(j);
+				Double normal = (val - min)/(max - min);
+				normalized.add(normal);
+			}
+			matrix.add(normalized);
+		}
+		return new DataMatrix<Double>(matrix);
 	}
 	
 	public static void main(String[] args){
