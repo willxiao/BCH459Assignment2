@@ -64,4 +64,3 @@ public class DataImporter {
 		System.out.println(d);
 	}
 }
-//Test for proper function of git plugin
