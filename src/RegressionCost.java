@@ -3,14 +3,16 @@ import java.util.List;
 import org.apache.commons.math.stat.regression.SimpleRegression;
 
 public class RegressionCost implements CostFunction<Double> {
+	private SimpleRegression r = new SimpleRegression();
 	
 	@Override
 	public Double getCost(List<Double> data) {
-		SimpleRegression r = new SimpleRegression();
 		for(int i = 0; i < data.size(); i++){
 			r.addData(i, data.get(i));
 		}
-		return r.getRSquare();
+		Double d = r.getRSquare();
+		r.clear();
+		return d;
 	}
 
 }
