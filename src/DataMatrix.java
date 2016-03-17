@@ -3,9 +3,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DataMatrix<T> {
+public class DataMatrix<T extends Number> {
 	private ArrayList<ArrayList<T>> original_matrix;
 	private int[] col_map;
+	private Double mean;
+	private Double variance;
+	private Double standardDeviation;
 	
 	DataMatrix(ArrayList<ArrayList<T>> m){
 		original_matrix = new ArrayList<ArrayList<T>>(m.size());
@@ -42,4 +45,45 @@ public class DataMatrix<T> {
 		return original_matrix.size();
 	}
 	
+	public Integer getColCount(){
+		return original_matrix.get(0).size();
+	}
+	
+	public Double getMean(){
+		if(mean == null){
+			Double sum = 0.0;
+			int count = original_matrix.size()*original_matrix.get(0).size();
+			for(int i = 0; i < original_matrix.size(); i++){
+				for(int j = 0; j < original_matrix.get(0).size(); j++){
+					sum += original_matrix.get(i).get(j).doubleValue();
+				}
+			}
+			mean = sum / count;
+		}
+		return mean;
+	}
+	
+	public Double getVariance(){
+		if(variance == null){
+			Double squaresum = 0.0;
+			int count = original_matrix.size()*original_matrix.get(0).size();
+			Double m = getMean();
+			
+			for(int i = 0; i < original_matrix.size(); i++){
+				for(int j = 0; j < original_matrix.get(0).size(); j++){
+					squaresum += Math.pow(m - original_matrix.get(i).get(j).doubleValue(), 2.0);
+				}
+			}
+			
+			variance = squaresum / count;
+		}
+		return variance;
+	}
+	
+	public Double getStandardDeviation(){
+		if(standardDeviation == null){
+			standardDeviation = Math.sqrt(getVariance());
+		}
+		return standardDeviation;
+	}
 }

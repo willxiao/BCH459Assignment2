@@ -37,7 +37,25 @@ public class DataImporter {
 	}
 	
 	public static DataMatrix<Integer> convertToDiscreteData(DataMatrix<Double> d){
-		return null;
+		Double mean = d.getMean();
+		Double standardDeviation = d.getStandardDeviation();
+		
+		ArrayList<ArrayList<Integer>> matrix = new ArrayList<ArrayList<Integer>>();
+		for(int i = 0; i < d.getRowCount(); i++){
+			for(int j = 0; j < d.getColCount(); j++){
+				Double val = d.getValue(i, j);
+				ArrayList<Integer> row = new ArrayList<Integer>();
+				if(val >= mean + standardDeviation){
+					row.add(2);
+				}else if(val <= mean - standardDeviation){
+					row.add(0);
+				}else{
+					row.add(1);
+				}
+				matrix.add(row);
+			}
+		}
+		return new DataMatrix<Integer>(matrix);
 	}
 	
 	public static void main(String[] args){
