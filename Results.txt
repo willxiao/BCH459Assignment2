@@ -7,3 +7,11 @@ Best Quadratic Regression Cost: 250.69022106060598
 Best Order based on Quadratic Regression cost: 8956723401
 Best Smooth Cost: 891.0
 Best Order based on smoothness cost: 9856723401
+
+Running Tests on normalized data
+Best Regression Cost: 8.375357663984522
+Best Order based on regression cost: 4751968032
+Best Quadratic Regression Cost: 129.9482144461258
+Best Order based on Quadratic Regression cost: 1043276598
+Best Smooth Cost: 1678.0
+Best Order based on smoothness cost: 9856723401
