@@ -1,0 +1,9 @@
+Best Regression Cost: 8.375357663984524
+Best Order based on regression cost: 2308691574
+
+Best Regression Cost: 8.375357663984524
+Best Order based on regression cost: 2308691574
+Best Quadratic Regression Cost: 250.69022106060598
+Best Order based on Quadratic Regression cost: 8956723401
+Best Smooth Cost: 891.0
+Best Order based on smoothness cost: 9856723401
